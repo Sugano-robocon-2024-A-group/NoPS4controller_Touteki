@@ -6,7 +6,7 @@
 Servo soutenServo;  // サーボオブジェクトを作成
 
 // 装填用サーボモータの速度調整（大きいほど遅い）
-const int Souten_Motor_Speed = 7;//10
+const int Souten_Motor_Speed = 3;//10
 // 装填用サーボモータ初期角度
 const int Souten_Motor_initialAngle = 45;//
 const int Souten_Motor_targetAngle = -30;//

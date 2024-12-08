@@ -75,7 +75,7 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
   //setupReceiver();
   //サーボピン初期設定
   gyoukakuServo.attach(gyoukaku_servoPin);  // サーボピンを設定
-  gyoukakuServo.write(25);  // 初期位置を25度（中央）に設定
+  gyoukakuServo.write(45);  // 初期位置を  45°　に設定　　25度（中央）
 
   //サーボピン初期設定
   soutenServo.attach(souten_servoPin);  // サーボピンを設定
