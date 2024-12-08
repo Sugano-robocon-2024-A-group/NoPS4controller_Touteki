@@ -19,10 +19,15 @@ float targetVoltage = 4.2;      // 初期値として3.5Vを設定
 // 電圧範囲
 const float maxVoltage = 8.0;   // 最大電圧
 const float minVoltage = 0.0;   // 最小電圧
-
+/*
 const int PIN_SYASYUTU_PWM = 4;  // 射出のPWM
 const int PIN_SYASYUTU_1 = 16;
 const int PIN_SYASYUTU_2 = 21;
+*/
+const int PIN_SYASYUTU_PWM = 16;  // 射出のPWM
+const int PIN_SYASYUTU_1 = 4;
+const int PIN_SYASYUTU_2 = 21;
+//21がLOW　　４　HIGH　16 PWM
 
 int syasyutu_condition = 0;
 int dutyCycle = calculateDutyCycle(targetVoltage, maxVoltage, minVoltage);
@@ -39,7 +44,6 @@ int gyoukaku_servoPin = 5;  // 仰角用サーボの接続ピンを指定（適�
 int Ashimawari_Command=0;//コマンド
 
 int value = 0;
-
   
 // setup関数: 初期設定を行う。CANバスの初期化と、送受信の設定を呼び出す
 void setup() {
@@ -66,7 +70,7 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
     Serial.println("CANの初期化に失敗しました！"); // CAN初期化に失敗した場合、エラーメッセージを表示して停止
     while (1);  // 永久ループで停止
   }
-
+  
   // 受信と送信の初期化関数を呼び出し
   //setupReceiver();
   //サーボピン初期設定
@@ -76,7 +80,16 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
   //サーボピン初期設定
   soutenServo.attach(souten_servoPin);  // サーボピンを設定
   soutenServo.write(20);  // 初期位置を20度（中央）に設定
-  
+  /*
+//PWM
+//ledcSetup PWMピンに使う
+//ledcSetup(uint8_t channel, uint32_t freq, uint8_t resolution_bits)
+ledcSetup(0, 5000, 8);
+// ledcAttachPin(uint8_t pin, uint8_t channel)
+ledcAttachPin(PIN_SYASYUTU_PWM, 0);
+// ledcWrite(uint8_t channel, uint32_t duty)
+ledcWrite(0, 128);   //
+  */
   //Serial.println("Ready.");
   setupSender();
   Serial.println("Start");
@@ -121,15 +134,18 @@ void loop(){
       }
       Serial.printf("%d",syasyutu_condition);
       if(syasyutu_condition==0){
-        analogWrite(PIN_SYASYUTU_PWM, 0 );//回転時間ってどんくらいですか？Dutyサイクルは先に回っています
+        digitalWrite(PIN_SYASYUTU_PWM, LOW);//回転時間ってどんくらいですか？Dutyサイクルは先に回っています
+        //analogWrite(PIN_SYASYUTU_1,dutyCycle);
         digitalWrite(PIN_SYASYUTU_1,HIGH);
         digitalWrite(PIN_SYASYUTU_2,LOW);
       }else{
         Serial.printf("%d",dutyCycle); 
         //analogWrite(PIN_SYASYUTU_PWM, dutyCycle );
         //Dutyサイクルは先に回っています
+        //analogWrite(PIN_SYASYUTU_PWM,dutyCycle);
         digitalWrite(PIN_SYASYUTU_PWM,HIGH);
         digitalWrite(PIN_SYASYUTU_1,HIGH);
+        //analogWrite(PIN_SYASYUTU_1,dutyCycle);
         digitalWrite(PIN_SYASYUTU_2,LOW);
       }
     }
