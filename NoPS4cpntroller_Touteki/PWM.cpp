@@ -8,5 +8,5 @@ int calculateDutyCycle(float voltage,float maxVoltage, float minVoltage) {
   if (voltage > maxVoltage) voltage = maxVoltage;
 
   // デューティサイクルを計算
-  return (int)((voltage / maxVoltage) * 255);
+  return (int)((voltage / maxVoltage) * 510);
 }

@@ -1,1 +1,1 @@
-//構造変更版、Send側
+//P$4controllerなし
