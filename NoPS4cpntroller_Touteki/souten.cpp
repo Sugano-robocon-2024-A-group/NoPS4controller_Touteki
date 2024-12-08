@@ -6,10 +6,10 @@
 Servo soutenServo;  // サーボオブジェクトを作成
 
 // 装填用サーボモータの速度調整（大きいほど遅い）
-const int Souten_Motor_Speed = 10;
+const int Souten_Motor_Speed = 7;//10
 // 装填用サーボモータ初期角度
-const int Souten_Motor_initialAngle = 20;
-const int Souten_Motor_targetAngle = 60;
+const int Souten_Motor_initialAngle = 50;//
+const int Souten_Motor_targetAngle = -30;//
 const int Souten_Modoshi = 500;
 
 
@@ -25,5 +25,7 @@ void moveServo(int startAngle, int endAngle) {
   for (int angle = startAngle; angle != endAngle + step; angle += step) {
     soutenServo.write(angle);
     delay(Souten_Motor_Speed); // 動作速度
-  }
+  }/*
+  soutenServo.write(angle);
+  delay(Souten_Motor_Speed);*/ // 動作速度
 }

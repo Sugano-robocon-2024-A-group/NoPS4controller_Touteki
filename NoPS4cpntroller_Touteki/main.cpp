@@ -79,7 +79,7 @@ const int CAN_RX_PIN = 26;  // 受信ピン（GPIO26）
 
   //サーボピン初期設定
   soutenServo.attach(souten_servoPin);  // サーボピンを設定
-  soutenServo.write(20);  // 初期位置を20度（中央）に設定
+  soutenServo.write(45);  // 初期位置を-10度（中央）に設定
   /*
 //PWM
 //ledcSetup PWMピンに使う
